@@ -1,4 +1,4 @@
-import { Analytics } from "@vercel/analytics/next"
+
 const moneyDisplay = document.getElementById('money-display');
 const message = document.getElementById('message');
 const button = document.getElementById('generate-btn');

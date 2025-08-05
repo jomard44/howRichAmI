@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How Rich Am I Today?</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <Analytics>
-  <div class="container">
-    <h1>💸 How Rich Am I Today? 💸</h1>
-    <div id="money-display">$0.00</div>
-    <p id="message">Click the button and see how rich you "are" today!</p>
-    <button id="generate-btn">Show Me the Money</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Rich Am I Today?</title>
+    <link rel="stylesheet" href="style.css" />
 
-    <div class="share">
-      <button id="share-twitter">Share on Twitter</button>
+    <script defer src="https://vercel.com/analytics/script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>💸 How Rich Am I Today? 💸</h1>
+      <div id="money-display">$0.00</div>
+      <p id="message">Click the button and see how rich you "are" today!</p>
+      <button id="generate-btn">Show Me the Money</button>
+
+      <div class="share">
+        <button id="share-twitter">Share on Twitter</button>
+      </div>
+
+      <h2>🏆 Leaderboard</h2>
+      <ul id="leaderboard"></ul>
     </div>
 
-    <h2>🏆 Leaderboard</h2>
-    <ul id="leaderboard"></ul>
-  </div>
-</Analytics>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
