@@ -15,22 +15,53 @@ const messages = [
   "Go wild! Or just pay your bills."
 ];
 
-// Load leaderboard from localStorage
-let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-
-// Display leaderboard
-function renderLeaderboard() {
-  leaderboardList.innerHTML = "";
-  leaderboard
-    .sort((a, b) => b.amount - a.amount)
-
-    .slice(0, 5)
-    .forEach(entry => {
-      const li = document.createElement('li');
-      li.textContent = `${entry.name}: $${entry.amount}`;
-      leaderboardList.appendChild(li);
-    });
+async function fetchLeaderboard() {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/leaderboard?select=*`, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`
+    }
+  });
+  const data = await res.json();
+  return data.sort((a, b) => b.amount - a.amount).slice(0, 5);
 }
+
+async function saveScore(name, amount) {
+  await fetch(`${SUPABASE_URL}/rest/v1/leaderboard`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`
+    },
+    body: JSON.stringify({ name, amount })
+  });
+}
+
+const SUPABASE_URL = process.env.PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = process.env.PUBLIC_SUPABASE_ANON_KEY;
+
+async function renderLeaderboard() {
+  const leaderboard = await fetchLeaderboard();
+  leaderboardList.innerHTML = "";
+  leaderboard.forEach(entry => {
+    const li = document.createElement("li");
+    li.textContent = `${entry.name}: $${entry.amount}`;
+    leaderboardList.appendChild(li);
+  });
+}
+
+button.addEventListener("click", async () => {
+  const randomMoney = (Math.random() * 1000000).toFixed(2);
+  moneyDisplay.textContent = `$${randomMoney}`;
+  message.textContent = messages[Math.floor(Math.random() * messages.length)];
+
+  const name = prompt("Enter your name for the leaderboard:");
+  if (name) {
+    await saveScore(name, randomMoney);
+    renderLeaderboard();
+  }
+});
 
 renderLeaderboard();
 
