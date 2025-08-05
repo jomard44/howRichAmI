@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 const moneyDisplay = document.getElementById('money-display');
 const message = document.getElementById('message');
 const button = document.getElementById('generate-btn');
@@ -22,6 +23,7 @@ function renderLeaderboard() {
   leaderboardList.innerHTML = "";
   leaderboard
     .sort((a, b) => b.amount - a.amount)
+
     .slice(0, 5)
     .forEach(entry => {
       const li = document.createElement('li');
