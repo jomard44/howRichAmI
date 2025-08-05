@@ -47,6 +47,6 @@ button.addEventListener('click', () => {
 
 shareTwitterBtn.addEventListener('click', () => {
   const text = `I just made ${moneyDisplay.textContent} today on "How Rich Am I Today?" 💸 Try it here:`;
-  const url = "https://your-site-link.com"; // Replace with your deployed URL
+  const url = "https://how-rich-am-i.vercel.app"; // Replace with your deployed URL
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
 });
